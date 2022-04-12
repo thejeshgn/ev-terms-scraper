@@ -18,6 +18,12 @@ jobs:
     - name: Fetch latest bolt.earth terms and conditions
       run: |-
         curl https://bolt.earth/terms > bolt-dot-earth-terms.html
+    - name: Fetch latest atherenergy.com App privacy policy
+      run: |-
+        curl https://www.atherenergy.com/ather-app-privacy-policy > atherenergy-dot-com-privacy.html
+    - name: Fetch latest atherenergy.com terms and conditions
+      run: |-
+        curl https://www.atherenergy.com/terms > atherenergy-dot-com-terms.html
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
