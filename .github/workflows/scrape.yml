@@ -24,6 +24,9 @@ jobs:
     - name: Fetch latest atherenergy.com terms and conditions
       run: |-
         curl https://www.atherenergy.com/terms > atherenergy-dot-com-terms.html
+    - name: Fetch latest com.tvsm.iqubeindia android app privacy
+      run: |-
+        curl https://tvs-evcubemobileapp-prod.azurewebsites.net/Content/AppContent/PrivacyPolicy.html > tvsevcube-app-privacy.html        
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
