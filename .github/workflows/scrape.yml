@@ -10,14 +10,37 @@ jobs:
   scheduled:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - uses: actions/cache@v2
+      name: Configure pip caching
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Cache Playwright browsers
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/ms-playwright/
+        key: ${{ runner.os }}-browsers
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Install Playwright dependencies
+      run: |
+        shot-scraper install
     - name: Check out this repo
       uses: actions/checkout@v2
     - name: Fetch latest bolt.earth privacy policy
       run: |-
-        curl https://bolt.earth/privacy > bolt-dot-earth-privacy.html
+        shot-scraper javascript https://bolt.earth/privacy  "document.querySelector('#content').innerHTML" > bolt-dot-earth-privacy.html
     - name: Fetch latest bolt.earth terms and conditions
       run: |-
-        curl https://bolt.earth/terms > bolt-dot-earth-terms.html
+        shot-scraper javascript https://bolt.earth/terms  "document.querySelector('#content').innerHTML" > bolt-dot-earth-terms.html
     - name: Fetch latest atherenergy.com App privacy policy
       run: |-
         curl https://www.atherenergy.com/ather-app-privacy-policy > atherenergy-dot-com-privacy.html
