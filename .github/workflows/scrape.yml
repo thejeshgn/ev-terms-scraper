@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron:  '10 * * * *'
+    - cron:  '0 0 * * *'
 
 jobs:
   scheduled:
@@ -43,10 +43,10 @@ jobs:
         shot-scraper javascript https://bolt.earth/terms  "document.querySelector('#content').innerHTML" > bolt-dot-earth-terms.html
     - name: Fetch latest atherenergy.com App privacy policy
       run: |-
-        curl https://www.atherenergy.com/ather-app-privacy-policy > atherenergy-dot-com-privacy.html
+        shot-scraper javascript https://www.atherenergy.com/ather-app-privacy-policy "document.querySelector('body').innerHTML" > atherenergy-dot-com-privacy.html
     - name: Fetch latest atherenergy.com terms and conditions
       run: |-
-        curl https://www.atherenergy.com/terms > atherenergy-dot-com-terms.html
+        shot-scraper javascript https://www.atherenergy.com/terms "document.querySelector('body').innerHTML" > atherenergy-dot-com-terms.html
     - name: Fetch latest com.tvsm.iqubeindia android app privacy
       run: |-
         curl https://tvs-evcubemobileapp-prod.azurewebsites.net/Content/AppContent/PrivacyPolicy.html > tvsevcube-app-privacy.html        
