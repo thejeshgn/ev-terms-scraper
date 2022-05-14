@@ -52,7 +52,7 @@ jobs:
         curl https://tvs-evcubemobileapp-prod.azurewebsites.net/Content/AppContent/PrivacyPolicy.html > tvsevcube-app-privacy.html        
     - name: Fetch latest privacy policy from olaelectric booking site
       run: |-
-        curl https://book.olaelectric.com/policy > book-olaelectric-privacy-policy.html        
+        shot-scraper javascript https://book.olaelectric.com/policy  "document.querySelector('.privay-policy-container').innerHTML" > bolt-dot-earth-privacy.html
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
